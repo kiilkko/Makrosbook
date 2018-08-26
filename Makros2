@@ -1,0 +1,15 @@
+Sub Макрос2()
+'Меняет выделенные Bold значения в колонке таблицы на значения из другой колонки подряд
+
+Set a = CreateObject("System.Collections.Queue")
+For Each v In Range(Cells(1, 3), Cells(159, 3))
+a.Enqueue v.Value
+Next v
+
+For Each cel In Range(Cells(1, 1), Cells(400, 1))
+If (cel.Font.Bold = True) Then
+cel.Value = a.Dequeue
+End If
+Next cel
+
+End Sub
