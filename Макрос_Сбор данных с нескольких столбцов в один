@@ -1,0 +1,43 @@
+Sub Макрос6()
+'Сбор данных с нескольких столбцов в один
+
+For Each cel In Range(Cells(4, 2), Cells(5879, 2))
+
+
+If (cel.Font.Bold = False) Then
+
+If (Cells(cel.Row, 15).Value <> Empty) Then
+first = Cells(cel.Row, 15).Value & ","
+Else
+first = ","
+End If
+
+If (Cells(cel.Row, 18).Value <> Empty) Then
+secon = Cells(cel.Row, 18).Value & ","
+Else
+secon = ","
+End If
+
+If (Cells(cel.Row, 17).Value <> Empty) Then
+third = Cells(cel.Row, 17).Value & ","
+Else
+third = ","
+End If
+
+fours = ","
+
+If (Cells(cel.Row, 16).Value <> Empty) Then
+fifth = Cells(cel.Row, 16).Value & ","
+Else
+fifth = ","
+End If
+
+s = "Нет," & first & secon & third & fours & fifth
+Cells(cel.Row, 28).Value = s
+
+Else
+Cells(cel.Row, 28).Value = Empty
+End If
+
+Next cel
+End Sub
