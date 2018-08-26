@@ -1,0 +1,15 @@
+Sub Макрос1()
+' Меняет значение строки в таблице, следующей после Bold-строки, на ее значение
+
+For Each cel In Range(Cells(1, 1), Cells(400, 1))
+If (cel.Font.Bold = True) Then
+Temp = cel.Value
+i = 0
+Else
+cel.Value = Temp
+i = i + 1
+Col = cel.Column + 1
+Cells(cel.Row, Col).Value = i
+End If
+Next cel
+End Sub
