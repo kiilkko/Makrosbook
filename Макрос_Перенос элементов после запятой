@@ -1,0 +1,34 @@
+Sub Разбиение()
+
+'Лучше переместить куда-нибудь анализируемый столбец, или освободить после него несколько столбцов, т.к.
+' алгоритм переносит найденные после запятой доп.элементы в следующие по порядку столбики
+Dim StrArray() As String
+Dim Length As Integer
+Static x As Integer
+
+    'Это поиск и удаление пробелов по столбцу. В скобках вместо AE3:AE47 подставить соответственно от и до какой ячейки будет идти поиск.
+    Range("A1:A208").Select
+    Selection.Replace What:=" ", Replacement:="", LookAt:=xlPart, _
+        SearchOrder:=xlByColumns, MatchCase:=False, SearchFormat:=False, _
+        ReplaceFormat:=False
+        
+  ' Начинается анализ и разбиение текста в ячейках. То же самое, вместо Cells(3, 31), Cells(10, 31) подставить начало и конец анализируемой области.
+  ' Первая цифра - строка, вторая - столбец.
+  For Each cel In Range(Cells(1, 1), Cells(208, 1))
+  StrArray() = Split(CStr(cel.Value), ",")
+  Length = UBound(StrArray) - LBound(StrArray) + 1
+  x = cel.Column + 1
+  
+  If (Length > 1) Then
+  
+  For Each Element In StrArray
+  Cells(cel.Row, x).Value = Element
+  x = x + 1
+  Next Element
+  x = 0
+  End If
+  
+  Next cel
+
+
+End Sub
